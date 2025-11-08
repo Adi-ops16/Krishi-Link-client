@@ -5,14 +5,25 @@ import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../Pages/Login";
 import Registration from "../Pages/Registration";
 import AllCrops from "../Pages/AllCrops";
+import AddCrop from "../Pages/AddCrop";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         Component: RootLayout,
         children: [
-            { index: true, Component: Home },
-            { path: "all-crops", Component: AllCrops },
+            {
+                index: true,
+                Component: Home
+            },
+            {
+                path: "all-crops",
+                Component: AllCrops
+            },
+            {
+                path: "add-crop",
+                Component: AddCrop
+            },
         ]
     },
     {

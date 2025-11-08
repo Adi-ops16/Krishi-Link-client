@@ -96,7 +96,7 @@ const Login = () => {
                                         type={`${showPassword ? "text" : "password"}`}
                                         className="w-full input input-bordered rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#4CAF50]"
                                         placeholder="••••••••"
-                                        require
+                                        required
                                         pattern="(?=.*[a-z])(?=.*[A-Z]).{6,}"
                                         title="Password must have at least 6 characters, including 1 uppercase and 1 lowercase letter"
                                     />

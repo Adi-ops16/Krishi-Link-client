@@ -17,28 +17,17 @@ const Navbar = () => {
 
     const links = (
         <>
-            <li>
-                <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                        `px-3 py-1 rounded-md transition-colors duration-200 ${isActive ? 'font-bold text-primary underline decoration-primary' : 'text-black hover:text-primary'
-                        }`
-                    }
-                >
-                    Home
-                </NavLink>
-            </li>
-            <li>
-                <NavLink
-                    to="/all-crops"
-                    className={({ isActive }) =>
-                        `px-3 py-1 rounded-md transition-colors duration-200 ${isActive ? 'font-bold text-primary underline decoration-primary' : 'text-black hover:text-primary'
-                        }`
-                    }
-                >
-                    All Crops
-                </NavLink>
-            </li>
+            <li><NavLink to="/">Home</NavLink></li>
+            <li><NavLink to="/all-crops">All Crops</NavLink> </li>
+            {
+                user &&
+                <>
+                    <li><NavLink to="/all-crops">Pofile</NavLink> </li>
+                    <li><NavLink to="/add-crop">Add Crop</NavLink> </li>
+                    <li><NavLink to="/all-crops">My Posts</NavLink> </li>
+                    <li><NavLink to="/all-crops">My Interests</NavLink> </li>
+                </>
+            }
         </>
     );
 
@@ -46,7 +35,6 @@ const Navbar = () => {
         <nav className="navbar px-4 md:px-8 bg-base-100 shadow-sm">
             {/* Navbar Start */}
             <div className="navbar-start">
-                {/* Mobile Dropdown */}
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
                         <svg
@@ -74,28 +62,29 @@ const Navbar = () => {
                 </Link>
             </div>
 
-            {/* Navbar Center - Large Screens */}
+            {/* Navbar Center */}
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">{links}</ul>
             </div>
 
             {/* Navbar End */}
             <div className="navbar-end flex items-center gap-5">
-                {user ? (
+                <figure>
+                    <img className='w-10 h-10 rounded-full' src={user?.photoURL} alt="user photo" />
+                </figure>
+                {user ?
                     <button
                         onClick={handleLogout}
-                        className="btn btn-md bg-linear-to-r from-[#43A047] to-[#8BC34A] border-none text-white hover:from-[#66BB6A] hover:to-[#4CAF50] transition-all duration-300"
-                    >
+                        className="btn btn-md bg-linear-to-r from-[#43A047] to-[#8BC34A] border-none text-white hover:from-[#66BB6A] hover:to-[#4CAF50] transition-all duration-300">
                         Logout
                     </button>
-                ) : (
+                    :
                     <Link
                         to="/auth/login"
-                        className="btn btn-md bg-linear-to-r from-[#43A047] to-[#8BC34A] border-none text-white hover:from-[#66BB6A] hover:to-[#4CAF50] transition-all duration-300"
-                    >
+                        className="btn btn-md bg-linear-to-r from-[#43A047] to-[#8BC34A] border-none text-white hover:from-[#66BB6A] hover:to-[#4CAF50] transition-all duration-300">
                         Login
                     </Link>
-                )}
+                }
             </div>
         </nav>
     );
