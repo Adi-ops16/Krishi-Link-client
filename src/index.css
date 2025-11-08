@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* Themes */
+@plugin "daisyui/theme" {
+    name: "light";
+    default: true;
+
+    --color-primary: #4CAF50;
+    --color-secondary: #FFD54F;
+    --color-accent: #FF7043;
+    --color-neutral: #2E342E; 
+    --color-base-100: #F9FAF9;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+.raleway {
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+}
+
+.inter {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+}
+
+
+
+/* Active route style */
+.active {
+    @apply font-bold text-primary underline decoration-primary;
+}
+
+
+
