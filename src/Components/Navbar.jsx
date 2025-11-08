@@ -69,7 +69,7 @@ const Navbar = () => {
 
                 {/* Logo */}
                 <Link to="/" className="flex items-center gap-2 ml-2">
-                    <img src={logo} alt="KrishiLink Logo" className="w-12 h-12 rounded-full border-2 border-primary" />
+                    <img src={logo} alt="KrishiLink Logo" className="w-12 h-12 rounded-full" />
                     <span className="font-bold text-xl text-primary hidden md:inline">KrishiLink</span>
                 </Link>
             </div>

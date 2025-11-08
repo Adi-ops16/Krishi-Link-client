@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../assets/logo.png';
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaXTwitter } from 'react-icons/fa6';
 
 const Footer = () => {
     return (
@@ -18,7 +18,7 @@ const Footer = () => {
                             <FaFacebookF />
                         </a>
                         <a href="#" className="btn btn-circle btn-sm btn-ghost hover:bg-primary hover:text-white transition-colors">
-                            <FaTwitter />
+                            <FaXTwitter />
                         </a>
                         <a href="#" className="btn btn-circle btn-sm btn-ghost hover:bg-primary hover:text-white transition-colors">
                             <FaInstagram />
