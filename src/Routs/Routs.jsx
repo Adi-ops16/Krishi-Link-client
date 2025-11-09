@@ -8,6 +8,9 @@ import AllCrops from "../Pages/AllCrops";
 import AddCrop from "../Pages/AddCrop";
 import PrivateRout from "./PrivateRout";
 import CropsDetails from "../Pages/CropsDetails";
+import Profile from "../Pages/Profile";
+import MyInterest from "../Pages/MyInterest";
+import MyPosts from "../Pages/MyPosts";
 
 export const router = createBrowserRouter([
     {
@@ -36,7 +39,28 @@ export const router = createBrowserRouter([
                         <CropsDetails></CropsDetails>
                     </PrivateRout>,
                 loader: ({ params }) => fetch(`https://krishilinkserver.vercel.app/crops/${params.id}`)
-            }
+            },
+            {
+                path: "profile",
+                element:
+                    <PrivateRout>
+                        <Profile></Profile>
+                    </PrivateRout>
+            },
+            {
+                path: "my-interest",
+                element:
+                    <PrivateRout>
+                        <MyInterest></MyInterest>
+                    </PrivateRout>
+            },
+            {
+                path: "my-post",
+                element:
+                    <PrivateRout>
+                        <MyPosts></MyPosts>
+                    </PrivateRout>
+            },
         ]
     },
     {

@@ -19,14 +19,14 @@ const Navbar = () => {
     const links = (
         <>
             <li><NavLink to="/">Home</NavLink></li>
-            <li><NavLink to="/all-crops">All Crops</NavLink> </li>
+            <li><NavLink to="/all-crops">All Crops</NavLink></li>
             {
                 user &&
                 <>
-                    <li><NavLink to="/all-crops">Pofile</NavLink> </li>
-                    <li><NavLink to="/add-crop">Add Crop</NavLink> </li>
-                    <li><NavLink to="/all-crops">My Posts</NavLink> </li>
-                    <li><NavLink to="/all-crops">My Interests</NavLink> </li>
+                    <li><NavLink to="/profile">Pofile</NavLink></li>
+                    <li><NavLink to="/add-crop">Add Crop</NavLink></li>
+                    <li><NavLink to="/my-post">My Posts</NavLink></li>
+                    <li><NavLink to="/my-interest">My Interests</NavLink></li>
                 </>
             }
         </>
