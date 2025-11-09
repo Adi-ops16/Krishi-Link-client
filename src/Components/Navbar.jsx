@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, NavLink } from 'react-router';
 import useAuthContext from '../Hooks/useAuthContext';
 import logo from '../assets/logo.png';
+import { FaRegUserCircle } from 'react-icons/fa';
 
 const Navbar = () => {
     const { logout, user, setUser } = useAuthContext();
@@ -69,9 +70,13 @@ const Navbar = () => {
 
             {/* Navbar End */}
             <div className="navbar-end flex items-center gap-5">
-                <figure>
-                    <img className='w-10 h-10 rounded-full' src={user?.photoURL} alt="user photo" />
-                </figure>
+                {user ?
+                    <figure>
+                        <img className='w-10 h-10 rounded-full' src={user?.photoURL} alt="user photo" />
+                    </figure>
+                    :
+                    <FaRegUserCircle size={28} color='#43A047' />
+                }
                 {user ?
                     <button
                         onClick={handleLogout}

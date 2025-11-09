@@ -1,14 +1,55 @@
-import { ReTitle } from "re-title";
 import React from "react";
+import { ReTitle } from "re-title";
 import { FaSeedling, FaImage, FaMapMarkerAlt } from "react-icons/fa";
 import { MdCategory, MdOutlineDescription } from "react-icons/md";
 import { TbWeight, TbCurrencyTaka } from "react-icons/tb";
+import useAuthContext from "../Hooks/useAuthContext";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
+import RingLoader from "../Components/Loaders/Loader";
 
 const AddCrop = () => {
+    const { user } = useAuthContext()
+    const axiosSecure = useAxiosSecure()
 
     const handleCropAdd = (e) => {
         e.preventDefault()
-        console.log("form submitted");
+        const crop_name = e.target.crop_name.value
+        const type = e.target.type.value
+        const price_per_unit = e.target.price.value
+        const unit = e.target.unit.value
+        const quantity = e.target.quantity.value
+        const location = e.target.location.value
+        const crop_image = e.target.crop_image.value
+        const description = e.target.description.value
+        const owner = {
+            owner_id: user.uid,
+            owner_email: user.email,
+            owner_name: user.displayName
+        }
+        const newCrop = {
+            crop_name,
+            type,
+            price_per_unit,
+            unit,
+            quantity,
+            location,
+            crop_image,
+            description,
+            owner
+        }
+        axiosSecure.post('/crops', newCrop)
+            .then(data => {
+                if (data.data.insertedId) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Your crop has been added",
+                        text: "Thank you for trusting us",
+                        confirmButtonColor: "#4CAF50"
+                    });
+                    e.target.reset()
+                }
+            })
     }
 
 
@@ -34,13 +75,16 @@ const AddCrop = () => {
                         <label className="block text-sm font-semibold text-gray-700 mb-1">
                             Crop Name
                         </label>
-                        <div className="flex items-center border border-gray-300 rounded-lg px-3">
+                        <div className="flex items-center border border-gray-300 rounded-lg px-3 focus-within:border-primary bg-white">
                             <FaSeedling className="text-gray-400" />
                             <input
-                                required
                                 type="text"
+                                name="crop_name"
+                                required
                                 placeholder="e.g. Tomato"
-                                className="input w-full shadow-none outline-none border-none bg-transparent" />
+                                className="w-full bg-white text-gray-800 placeholder-gray-400 border-none outline-none shadow-none py-2 px-2 
+                                autofill:shadow-[inset_0_0_0px_1000px_white] autofill:text-fill-black"
+                            />
                         </div>
                     </div>
 
@@ -51,7 +95,7 @@ const AddCrop = () => {
                         </label>
                         <div className="flex items-center border border-gray-300 rounded-lg px-3">
                             <MdCategory className="text-gray-400" />
-                            <select required
+                            <select required name="type"
                                 className="select w-full shadow-none border-none bg-white outline-none" defaultValue="">
                                 <option value="" disabled>Select type</option>
                                 <option>Vegetable</option>
@@ -69,6 +113,7 @@ const AddCrop = () => {
                         <div className="flex items-center border border-gray-300 rounded-lg px-3">
                             <TbCurrencyTaka className="text-gray-400" />
                             <input
+                                name="price"
                                 required
                                 type="number"
                                 placeholder="e.g. 55"
@@ -84,7 +129,7 @@ const AddCrop = () => {
                         </label>
                         <div className="flex items-center border border-gray-300 rounded-lg px-3">
                             <TbWeight className="text-gray-400" />
-                            <select className="select w-full border-none bg-white outline-none shadow-none" required defaultValue="">
+                            <select name="unit" className="select w-full border-none bg-white outline-none shadow-none" required defaultValue="">
                                 <option value="" disabled>Select unit</option>
                                 <option>kg</option>
                                 <option>ton</option>
@@ -99,6 +144,7 @@ const AddCrop = () => {
                             Quantity Available
                         </label>
                         <input
+                            name="quantity"
                             required
                             type="number"
                             placeholder="e.g. 400"
@@ -111,12 +157,15 @@ const AddCrop = () => {
                         <label className="block text-sm font-semibold text-gray-700 mb-1">
                             Location
                         </label>
-                        <div className="flex items-center border border-gray-300 rounded-lg px-3">
+                        <div className="flex items-center border border-gray-300 rounded-lg px-3 focus-within:border-primary bg-white">
                             <FaMapMarkerAlt className="text-gray-400" />
-                            <input required
+                            <input
+                                required
+                                name="location"
                                 type="text"
                                 placeholder="e.g. Bogura"
-                                className="input w-full shadow-none outline-none border-none bg-transparent"
+                                className="w-full bg-white text-gray-800 placeholder-gray-400 border-none outline-none shadow-none py-2 px-2 
+                                autofill:shadow-[inset_0_0_0px_1000px_white] autofill:text-fill-black"
                             />
                         </div>
                     </div>
@@ -126,26 +175,27 @@ const AddCrop = () => {
                         <label className="block text-sm font-semibold text-gray-700 mb-1">
                             Crop Image URL
                         </label>
-                        <div className="flex items-center border border-gray-300 rounded-lg px-3">
+                        <div className="flex items-center border border-gray-300 rounded-lg px-3 focus-within:border-primary bg-white">
                             <FaImage className="text-gray-400" />
                             <input
+                                name="crop_image"
                                 required
                                 type="text"
                                 placeholder="https://example.com/image.jpg"
-                                className="input w-full bg-white outline-none shadow-none border-none"
+                                className="w-full bg-white text-gray-800 placeholder-gray-400 border-none outline-none shadow-none py-2 px-2 
+                                autofill:shadow-[inset_0_0_0px_1000px_white] autofill:text-fill-black"
                             />
                         </div>
                     </div>
 
                     {/* Description */}
                     <div className="md:col-span-2">
-                        <label for="description" className="block text-sm font-semibold text-gray-700 mb-1">
+                        <label className="block text-sm font-semibold text-gray-700 mb-1">
                             Description
                         </label>
                         <div className="flex items-start border border-gray-300 rounded-lg px-3 py-2">
                             <MdOutlineDescription className="text-gray-400 mt-1" />
                             <textarea
-                                id="description"
                                 name="description"
                                 placeholder="Write a short description about your crop..."
                                 className="textarea shadow-none resize-none w-full border-none focus:outline-none bg-transparent"
