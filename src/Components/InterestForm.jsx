@@ -11,7 +11,26 @@ const InterestForm = ({ _id, price_per_unit, quantity }) => {
     const { user } = useAuthContext()
     const [totalPrice, setTotalPrice] = useState(0);
     const [interestedQuantity, setInterestedQuantity] = useState("");
+    const [interested, setInterested] = useState(false)
 
+    useEffect(() => {
+        if (!user) { return }
+
+        axiosSecure.get(`/crops/${_id}`)
+            .then(res => {
+                const crop = res.data
+                const alreadyInterested = crop.interest.some(interest => {
+                    return interest.interestedUserEmail === user.email
+                })
+                setInterested(alreadyInterested)
+            })
+            .catch(error => console.log("error from interest", error))
+
+    }, [user, _id, axiosSecure])
+
+
+
+    // checking for interest submit validation
     useEffect(() => {
         const q = parseFloat(interestedQuantity);
         if (!isNaN(q) && q > 0 && q <= quantity) {
@@ -136,11 +155,21 @@ const InterestForm = ({ _id, price_per_unit, quantity }) => {
 
                 {/* Submit Button */}
                 <div className="flex justify-center pt-3">
-                    <button
-                        type="submit"
-                        className="btn bg-[#4CAF50] hover:bg-[#43A047] text-white px-8 py-2 rounded-lg shadow-md transition-all duration-200">
-                        Submit Interest
-                    </button>
+                    {
+                        interested ?
+                            <button
+                                type="submit"
+                                disabled
+                                className="btn bg-[#4CAF50] hover:bg-[#43A047] text-white px-8 py-2 rounded-lg shadow-md transition-all duration-200">
+                                You have already submitted interest
+                            </button>
+                            :
+                            <button
+                                type="submit"
+                                className="btn bg-[#4CAF50] hover:bg-[#43A047] text-white px-8 py-2 rounded-lg shadow-md transition-all duration-200">
+                                Submit Interest
+                            </button>
+                    }
                 </div>
             </form>
         </div>
