@@ -11,6 +11,7 @@ import CropsDetails from "../Pages/CropsDetails";
 import Profile from "../Pages/Profile";
 import MyInterest from "../Pages/MyInterest";
 import MyPosts from "../Pages/MyPosts";
+import Loader from "../Components/Loaders/Loader";
 
 export const router = createBrowserRouter([
     {
@@ -38,7 +39,6 @@ export const router = createBrowserRouter([
                     <PrivateRout>
                         <CropsDetails></CropsDetails>
                     </PrivateRout>,
-                loader: ({ params }) => fetch(`https://krishilinkserver.vercel.app/crops/${params.id}`)
             },
             {
                 path: "profile",

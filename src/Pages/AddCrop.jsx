@@ -28,15 +28,7 @@ const AddCrop = () => {
             owner_name: user.displayName
         }
         const newCrop = {
-            crop_name,
-            type,
-            price_per_unit,
-            unit,
-            quantity,
-            location,
-            crop_image,
-            description,
-            owner
+            crop_name, type, price_per_unit, unit, quantity, location, crop_image, description, owner
         }
         axiosSecure.post('/crops', newCrop)
             .then(data => {

@@ -12,9 +12,9 @@ const Registration = () => {
 
     const handleRegister = (e) => {
         e.preventDefault();
-        const name = e.target.name.value;
+        const displayName = e.target.name.value;
         const email = e.target.email.value;
-        const photo = e.target.photo.value;
+        const photoURL = e.target.photo.value;
         const password = e.target.password.value;
 
         createNewUser(email, password)
