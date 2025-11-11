@@ -7,7 +7,7 @@ import { IoIosEyeOff } from 'react-icons/io';
 import { Link } from 'react-router';
 
 const Registration = () => {
-    const { setUser, setUserLoading, createNewUser, googleSignUp } = useAuthContext();
+    const { setUser, setUserLoading, createNewUser, googleSignUp, updateUser } = useAuthContext();
     const [showPassword, setShowPassword] = useState(false);
 
     const handleRegister = (e) => {
@@ -18,16 +18,31 @@ const Registration = () => {
         const password = e.target.password.value;
 
         createNewUser(email, password)
-            .then(data => {
+            .then(async (data) => {
+                const user = data.user;
+                await updateUser(user, {
+                    displayName,
+                    photoURL
+                })
                 Swal.fire({
                     icon: "success",
-                    title: "Welcome Back!",
-                    text: "You have successfully logged in.",
+                    title: "Welcome to Krishi Link",
+                    text: "Your account has been successfully created",
                     confirmButtonColor: "#4CAF50"
                 })
-                setUser(data.user)
+                setUser(user)
                 setUserLoading(false)
             })
+            .catch(error => {
+                console.log("error on creating a user", error);
+                Swal.fire({
+                    icon: "error",
+                    title: "Registration failed",
+                    text: `${error.message}`,
+                    confirmButtonColor: "red"
+                })
+            })
+        e.target.reset()
     };
 
     const handleGoogleSignUp = () => {

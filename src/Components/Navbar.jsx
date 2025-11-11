@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router';
 import useAuthContext from '../Hooks/useAuthContext';
 import logo from '../assets/logo.png';
 import { FaRegUserCircle } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
     const { logout, user, setUser } = useAuthContext();
@@ -10,7 +11,11 @@ const Navbar = () => {
     const handleLogout = () => {
         logout()
             .then(() => {
-                alert("Logout Successful");
+                Swal.fire({
+                    icon: "success",
+                    title: "Logout successful",
+                    confirmButtonColor: "#4CAF50"
+                });
                 setUser(null);
             })
             .catch((error) => console.log(error.code));
@@ -72,7 +77,7 @@ const Navbar = () => {
             <div className="navbar-end flex items-center gap-5">
                 {user ?
                     <figure>
-                        <img className='w-10 h-10 rounded-full' src={user?.photoURL} alt="user photo" />
+                        <img className='w-10 h-10 rounded-full' src={user.photoURL} alt="user photo" />
                     </figure>
                     :
                     <FaRegUserCircle size={28} color='#43A047' />

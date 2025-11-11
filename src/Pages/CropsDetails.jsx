@@ -5,11 +5,15 @@ import { TbCurrencyTaka, TbWeight } from "react-icons/tb";
 import { MdCategory } from "react-icons/md";
 import InterestForm from "../Components/InterestForm";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import OwnersInterestsTable from "../Components/OwnersInterestsTable";
+import useAuthContext from "../Hooks/useAuthContext";
+import Loader from "../Components/Loaders/Loader";
 
 const CropsDetails = () => {
     const { id } = useParams()
-    const [data, setData] = useState({})
+    const [data, setData] = useState(null)
     const axiosSecure = useAxiosSecure()
+    const { user } = useAuthContext()
 
     useEffect(() => {
         axiosSecure(`/crops/${id}`)
@@ -18,20 +22,21 @@ const CropsDetails = () => {
             })
     }, [axiosSecure, id])
 
+    if (!data?.owner?.owner_id) { return }
 
     const { _id, crop_name, type, price_per_unit, unit, quantity, location, crop_image, description, owner,
     } = data || {};
 
     return (
         <div className="min-h-screen bg-linear-to-b from-green-50 to-white py-14 px-4">
-            <div className="max-w-11/12 mx-auto grid md:grid-cols-2 gap-10 items-start">
+            <div className="max-w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
                 {/* crop details */}
-                <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div className="bg-white rounded-2xl shadow-lg border border-gray-100  hover:shadow-xl transition-shadow duration-300">
                     <div className="relative">
                         <img
                             src={crop_image}
                             alt={crop_name}
-                            className="w-full h-72 object-cover" />
+                            className="w-full h-72 object-cover rounded-t-lg" />
                         <div className="absolute bottom-0 left-0 w-full bg-linear-to-t from-black/60 to-transparent p-4 text-white">
                             <h1 className="text-2xl font-bold">{crop_name}</h1>
                             <p className="text-sm text-green-100">{type}</p>
@@ -85,12 +90,20 @@ const CropsDetails = () => {
                     </div>
                 </div>
 
-                {/*  interest form / interest table */}
-                <div className="sticky top-24">
-                    <InterestForm _id={_id} price_per_unit={price_per_unit} quantity={quantity} />
-                </div>
+                {/* form for user / table for owner */}
+
+                {
+                    user.uid === owner.owner_id ?
+                        < div className="sticky top-24">
+                            <OwnersInterestsTable _id={_id} />
+                        </div>
+                        :
+                        <div className="sticky top-24">
+                            <InterestForm _id={_id} price_per_unit={price_per_unit} quantity={quantity} />
+                        </div>
+                }
             </div>
-        </div>
+        </div >
     );
 };
 

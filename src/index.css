@@ -9,7 +9,7 @@
     --color-primary: #4CAF50;
     --color-secondary: #FFD54F;
     --color-accent: #FF7043;
-    --color-neutral: #2E342E; 
+    --color-neutral: #2E342E;
     --color-base-100: #F9FAF9;
 }
 
@@ -31,6 +31,4 @@
 .active {
     @apply font-bold text-primary underline decoration-primary;
 }
-
-
 

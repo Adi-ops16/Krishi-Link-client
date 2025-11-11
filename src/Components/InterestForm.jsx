@@ -13,13 +13,14 @@ const InterestForm = ({ _id, price_per_unit, quantity }) => {
     const [interestedQuantity, setInterestedQuantity] = useState("");
     const [interested, setInterested] = useState(false)
 
+    // get the specific crop data
     useEffect(() => {
-        if (!user) { return }
+        if (!user || !_id) { return }
 
         axiosSecure.get(`/crops/${_id}`)
             .then(res => {
                 const crop = res.data
-                const alreadyInterested = crop.interest.some(interest => {
+                const alreadyInterested = crop.interests.some(interest => {
                     return interest.interestedUserEmail === user.email
                 })
                 setInterested(alreadyInterested)
@@ -28,9 +29,7 @@ const InterestForm = ({ _id, price_per_unit, quantity }) => {
 
     }, [user, _id, axiosSecure])
 
-
-
-    // checking for interest submit validation
+    // validating the submission
     useEffect(() => {
         const q = parseFloat(interestedQuantity);
         if (!isNaN(q) && q > 0 && q <= quantity) {
@@ -40,6 +39,7 @@ const InterestForm = ({ _id, price_per_unit, quantity }) => {
         }
     }, [interestedQuantity, price_per_unit, quantity]);
 
+    // submitting form
     const handleInterest = (e) => {
         e.preventDefault();
         const q = parseFloat(interestedQuantity);
@@ -74,7 +74,6 @@ const InterestForm = ({ _id, price_per_unit, quantity }) => {
 
         axiosSecure.post(`/crops/${_id}/interests`, newInterest)
             .then((data) => {
-                console.log("data of modifier", data);
                 if (data.data.modifiedCount) {
                     Swal.fire({
                         icon: "success",
@@ -85,6 +84,7 @@ const InterestForm = ({ _id, price_per_unit, quantity }) => {
                     e.target.reset();
                     setInterestedQuantity("");
                     setTotalPrice(0);
+                    setInterested(true)
                 }
             });
     };
