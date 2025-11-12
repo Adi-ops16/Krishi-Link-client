@@ -72,14 +72,12 @@ const CropsDetails = () => {
                             </p>
                         </div>
 
-                        {/* Owner Info */}
                         <div className="mt-6 border-t border-gray-200 pt-4">
                             <h3 className="font-semibold text-gray-800 mb-1">Posted by</h3>
                             <p className="text-gray-700">{owner?.owner_name}</p>
                             <p className="text-gray-500 text-sm">{owner?.owner_email}</p>
                         </div>
 
-                        {/* Back Button */}
                         <div className="pt-5 flex justify-end">
                             <Link
                                 to="/all-crops"
