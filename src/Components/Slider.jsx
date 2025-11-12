@@ -19,8 +19,8 @@ const Slider = () => {
     }, [axiosInstance]);
 
     return (
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-10 text-[#2e2e2e]">
+        <div data-aos="fade-up" className="max-w-7xl mx-auto px-4 md:px-8 py-12">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-center my-10 text-[#2e2e2e]">
                 🌾 Latest Crops
             </h2>
 

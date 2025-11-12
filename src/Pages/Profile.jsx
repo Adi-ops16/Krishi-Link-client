@@ -70,6 +70,10 @@ const Profile = () => {
 
     return (
         <div className="min-h-[calc(100vh-400px)] bg-linear-to-b from-green-50 to-white py-12 px-4">
+
+            <h1 className="text-center text-gray-800 mt-10 text-4xl font-bold raleway">Welcome to you Profile <span className="text-green-600">{profileData.name}</span></h1>
+            <p className="text-center mt-5 text-lg font-semibold mb-10 text-gray-600">you can edit your profile here</p>
+
             <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
                 <form onSubmit={handleProfileUpdate}>
                     {/* Header */}

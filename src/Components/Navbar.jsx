@@ -28,10 +28,10 @@ const Navbar = () => {
             {
                 user &&
                 <>
-                    <li><NavLink to="/profile">Pofile</NavLink></li>
                     <li><NavLink to="/add-crop">Add Crop</NavLink></li>
                     <li><NavLink to="/my-post">My Posts</NavLink></li>
                     <li><NavLink to="/my-interest">My Interests</NavLink></li>
+                    <li><NavLink to="/profile">Pofile</NavLink></li>
                 </>
             }
         </>
@@ -48,8 +48,7 @@ const Navbar = () => {
                             className="h-6 w-6"
                             fill="none"
                             viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
+                            stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </label>

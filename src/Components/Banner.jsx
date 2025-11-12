@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 const Banner = () => {
     return (
-        <div className="hero max-w-7xl mx-auto h-[calc(100vh/2)] rounded-lg overflow-hidden my-10 bg-cover bg-center relative" style={{ backgroundImage: `url(${banner})` }}>
+        <div className="hero max-w-7xl mx-auto h-[calc(100vh/1.5)] rounded-lg overflow-hidden my-14 bg-cover bg-center relative" style={{ backgroundImage: `url(${banner})` }}>
             <div className="relative hero-content text-neutral-content text-center px-6">
                 <div className="max-w-md mx-auto">
                     <h1 className="mb-5 text-5xl font-extrabold text-white drop-shadow-lg raleway">
