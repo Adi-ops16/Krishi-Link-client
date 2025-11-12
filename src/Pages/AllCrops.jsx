@@ -29,9 +29,11 @@ const AllCrops = () => {
     return (
         <div className="max-w-11/12 mx-auto py-12 px-4 sm:px-6 lg:px-8">
             {/* Page Title */}
-            <h1 className="text-3xl font-bold text-[#4CAF50] text-center mb-8">
-                All Crops
-            </h1>
+            <div className="flex justify-center">
+                <h1 className="text-3xl font-bold text-[#4CAF50] gap-3 flex items-center mb-8">
+                    <FaSeedling size={35} /> All Crops
+                </h1>
+            </div>
 
             {/* Search Bar */}
             <div className="mb-8 flex justify-center">

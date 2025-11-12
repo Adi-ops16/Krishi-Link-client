@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import useAuthContext from '../Hooks/useAuthContext';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEdit, FaSeedling, FaTrash } from 'react-icons/fa';
 import CropsModal from '../Components/CropsModal';
 import Swal from 'sweetalert2';
 
@@ -85,7 +85,10 @@ const MyPosts = () => {
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-10">
-            <h1 className="text-2xl font-bold text-gray-800 mb-6">My Posted Crops</h1>
+            <div className='flex gap-3 justify-center'>
+                
+                <h1 className="text-2xl font-bold text-gray-800 mb-6 flex gap-3 items-center"><FaSeedling className='text-green-600' size={25} /> My Posted Crops</h1>
+            </div>
 
             <div className="overflow-x-auto">
                 <table className="w-full text-sm text-left border-collapse min-w-[900px]">
