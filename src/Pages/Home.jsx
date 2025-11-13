@@ -5,6 +5,7 @@ import Slider from '../Components/Slider';
 import AboutUs from '../Components/AboutUs';
 import Achievements from '../Components/Achievements';
 import Newsletters from '../Components/Newsletters';
+import HowItWorks from '../Components/HowItWorks';
 
 const Home = () => {
     return (
@@ -17,6 +18,9 @@ const Home = () => {
 
             {/* slider */}
             <Slider></Slider>
+
+            {/* How it works */}
+            <HowItWorks></HowItWorks>
 
             {/* About us section */}
             <AboutUs></AboutUs>

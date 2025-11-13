@@ -4,6 +4,7 @@ import useAuthContext from '../Hooks/useAuthContext';
 import logo from '../assets/logo.png';
 import { FaRegUserCircle } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import { Home } from 'lucide-react';
 
 const Navbar = () => {
     const { logout, user, setUser } = useAuthContext();
