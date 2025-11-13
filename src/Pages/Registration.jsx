@@ -5,10 +5,12 @@ import loginImage from '../assets/authBanner.jpg';
 import { FaEye } from 'react-icons/fa6';
 import { IoIosEyeOff } from 'react-icons/io';
 import { Link, useLocation, useNavigate } from 'react-router';
+import useAxios from '../Hooks/useAxios';
 
 const Registration = () => {
     const { setUser, setUserLoading, createNewUser, googleSignUp, updateUser } = useAuthContext();
     const [showPassword, setShowPassword] = useState(false);
+    const axiosInstance = useAxios()
     const location = useLocation()
     const navigate = useNavigate()
 
@@ -26,6 +28,16 @@ const Registration = () => {
                     displayName,
                     photoURL
                 })
+
+                const userInfo = {
+                    displayName,
+                    photoURL,
+                    email,
+                    created_at: new Date()
+                }
+
+                axiosInstance.post('/user', userInfo)
+
                 Swal.fire({
                     icon: "success",
                     title: "Welcome to Krishi Link",
@@ -51,12 +63,23 @@ const Registration = () => {
     const handleGoogleSignUp = () => {
         googleSignUp()
             .then((data) => {
+                const user = data.user
+                const { displayName, photoURL, email } = user
                 Swal.fire({
                     icon: 'success',
                     title: 'Welcome to KrishiLink',
                     text: 'Login Successful',
                     confirmButtonColor: '#4CAF50',
                 });
+                const userInfo = {
+                    displayName,
+                    photoURL,
+                    email,
+                    created_at: new Date()
+                }
+
+                axiosInstance.post('/user', userInfo)
+
                 setUser(data.user)
                 setUserLoading(false)
                 navigate(location.state ? location.state : "/")

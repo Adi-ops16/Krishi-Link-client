@@ -1,6 +1,6 @@
-<!-- # 🌾 KrishiLink – Grow, Connect & Thrive
+# 🌾 KrishiLink – Grow, Connect & Thrive
 
-**Live Site URL:** [https://krishilink.vercel.app](https://krishilink.vercel.app)
+**Live Site URL:** [https://assignment-10-46c35.web.app/]
 
 KrishiLink is a modern agriculture-based web platform that connects **farmers, traders, and consumers** in a smart, sustainable, and efficient digital marketplace.  
 Built with the **MERN stack**, KrishiLink helps users share crop details, express buying interests, and manage their agricultural activities easily.
@@ -52,4 +52,4 @@ Built with the **MERN stack**, KrishiLink helps users share crop details, expres
 
 ---
 
-> _“Empowering agriculture with technology — one connection at a time.”_ -->
+> _“Empowering agriculture with technology — one connection at a time.”_
