@@ -13,7 +13,7 @@ const MyInterest = () => {
     const { user } = useAuthContext();
     const [interests, setInterests] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [sortOption, setSortOption] = useState(""); // new state
+    const [sortOption, setSortOption] = useState("");
 
     useEffect(() => {
         setLoading(true);
@@ -26,7 +26,6 @@ const MyInterest = () => {
             .catch((err) => console.error(err));
     }, [axiosSecure, user.email]);
 
-    // ✅ Sorting logic
     const sortedInterests = [...interests].sort((a, b) => {
         if (sortOption === "price-asc") {
             return a.total_price - b.total_price;
@@ -44,17 +43,13 @@ const MyInterest = () => {
         <div className={`min-h-[calc(100vh/2)] ${interests.length === 0 ? "bg-[#ffffff80]" : "bg-linear-to-b from-green-50 to-white"} py-14 px-4`}>
             <ReTitle title="My Interests || Krishi-Link" />
 
-            {loading ? (
-                <Loader />
-            ) : (
-                <div className="max-w-7xl mx-auto rounded-2xl shadow-md border border-gray-100 p-6 bg-[#ffffff1e]">
+            {loading ? <Loader /> :
+                (<div className="max-w-7xl mx-auto rounded-2xl shadow-md border border-gray-100 p-6 bg-[#ffffff1e]">
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-3">
                         <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
                             <FaSeedling className="text-green-600" /> My Interests
                         </h1>
 
-                        {/* ✅ Sorting Dropdown */}
-                       
                         {interests.length > 0 && (
                             <div className="flex items-center gap-3">
                                 <label htmlFor="sort" className="text-gray-700 font-medium">
@@ -71,8 +66,7 @@ const MyInterest = () => {
                                     <option className="bg-green-50 " value="quantity-asc">Quantity (Low → High)</option>
                                     <option className="bg-green-50 " value="quantity-desc">Quantity (High → Low)</option>
                                 </select>
-                            </div>
-                        )}
+                            </div>)}
                     </div>
 
                     <div className="overflow-x-auto">
@@ -94,8 +88,7 @@ const MyInterest = () => {
                                 {sortedInterests.map((interest) => (
                                     <tr
                                         key={interest.interest_id}
-                                        className="border-b border-gray-200 hover:bg-gray-50 transition-colors"
-                                    >
+                                        className="border-b border-gray-200 hover:bg-gray-50 transition-colors">
                                         <td className="py-3 px-4">
                                             <img
                                                 src={interest.crop_image}
@@ -145,8 +138,7 @@ const MyInterest = () => {
                                         <td className="py-3 px-4 text-center">
                                             <Link
                                                 to={`/crop-details/${interest.crop_id}`}
-                                                className="px-4 py-1.5 rounded-lg text-white text-sm font-medium bg-green-600 hover:bg-green-500 transition-colors shadow-sm"
-                                            >
+                                                className="px-4 py-1.5 rounded-lg text-white text-sm font-medium bg-green-600 hover:bg-green-500 transition-colors shadow-sm">
                                                 View
                                             </Link>
                                         </td>
@@ -169,7 +161,7 @@ const MyInterest = () => {
                         </table>
                     </div>
                 </div>
-            )}
+                )}
         </div>
     );
 };

@@ -6,10 +6,11 @@ import AboutUs from '../Components/AboutUs';
 import Achievements from '../Components/Achievements';
 import Newsletters from '../Components/Newsletters';
 import HowItWorks from '../Components/HowItWorks';
+import Blogs from '../Components/Blogs';
 
 const Home = () => {
     return (
-        <div>
+        <div className='px-2'>
             {/* title */}
             <ReTitle title='Home | Krishi-Link'></ReTitle>
 
@@ -27,6 +28,9 @@ const Home = () => {
 
             {/* achievements */}
             <Achievements></Achievements>
+
+            {/* Blogs */}
+            <Blogs></Blogs>
 
             {/* Newsletter */}
             <Newsletters></Newsletters>

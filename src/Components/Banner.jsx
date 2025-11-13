@@ -13,8 +13,8 @@ const Banner = () => {
         {
             title: "Grow, Connect & Thrive",
             text: "Join KrishiLink — a digital space where farmers, traders, and consumers collaborate directly to make agriculture smarter, sustainable, and more connected.",
-            button: "Explore Now",
-            link: "/all-crops",
+            button: "Add your product now",
+            link: "/add-crop",
         },
         {
             title: "Empowering Farmers Nationwide",

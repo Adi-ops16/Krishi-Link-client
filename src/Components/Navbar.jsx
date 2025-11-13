@@ -2,9 +2,12 @@ import React from 'react';
 import { Link, NavLink } from 'react-router';
 import useAuthContext from '../Hooks/useAuthContext';
 import logo from '../assets/logo.png';
-import { FaRegUserCircle } from 'react-icons/fa';
+import { FaHome, FaRegUserCircle, FaSeedling } from 'react-icons/fa';
 import Swal from 'sweetalert2';
-import { Home } from 'lucide-react';
+import { MdOutlinePostAdd } from 'react-icons/md';
+import { GrDocumentText } from 'react-icons/gr';
+import { GoHeartFill } from 'react-icons/go';
+import { CgProfile } from 'react-icons/cg';
 
 const Navbar = () => {
     const { logout, user, setUser } = useAuthContext();
@@ -24,15 +27,15 @@ const Navbar = () => {
 
     const links = (
         <>
-            <li><NavLink to="/">Home</NavLink></li>
-            <li><NavLink to="/all-crops">All Crops</NavLink></li>
+            <li><NavLink to="/"><FaHome /> Home</NavLink></li>
+            <li><NavLink to="/all-crops"><FaSeedling /> All Crops</NavLink></li>
             {
                 user &&
                 <>
-                    <li><NavLink to="/add-crop">Add Crop</NavLink></li>
-                    <li><NavLink to="/my-post">My Posts</NavLink></li>
-                    <li><NavLink to="/my-interest">My Interests</NavLink></li>
-                    <li><NavLink to="/profile">Pofile</NavLink></li>
+                    <li><NavLink to="/add-crop"><MdOutlinePostAdd />Add Crop</NavLink></li>
+                    <li><NavLink to="/my-post"><GrDocumentText /> My Posts</NavLink></li>
+                    <li><NavLink to="/my-interest"><GoHeartFill /> My Interests</NavLink></li>
+                    <li><NavLink to="/profile"><CgProfile /> Profile</NavLink></li>
                 </>
             }
         </>

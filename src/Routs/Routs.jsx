@@ -12,11 +12,13 @@ import Profile from "../Pages/Profile";
 import MyInterest from "../Pages/MyInterest";
 import MyPosts from "../Pages/MyPosts";
 import Loader from "../Components/Loaders/Loader";
+import Error from "../Pages/Error";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         Component: RootLayout,
+        errorElement: <Error></Error>,
         children: [
             {
                 index: true,
