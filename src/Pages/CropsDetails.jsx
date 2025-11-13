@@ -8,6 +8,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import OwnersInterestsTable from "../Components/OwnersInterestsTable";
 import useAuthContext from "../Hooks/useAuthContext";
 import Loader from "../Components/Loaders/Loader";
+import { ReTitle } from "re-title";
 
 const CropsDetails = () => {
     const { id } = useParams();
@@ -40,6 +41,7 @@ const CropsDetails = () => {
 
     return (
         <div className="min-h-screen bg-linear-to-b from-green-50 to-white py-14 px-4">
+            <ReTitle title="Crop-details || Krishi-Link"></ReTitle>
             {loading ? (
                 <Loader />
             ) : (

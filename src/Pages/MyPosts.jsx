@@ -6,6 +6,7 @@ import CropsModal from '../Components/CropsModal';
 import Swal from 'sweetalert2';
 import Loader from '../Components/Loaders/Loader';
 import notFound from '/not-found.jpg'
+import { ReTitle } from 're-title';
 
 const MyPosts = () => {
     const { user } = useAuthContext();
@@ -92,8 +93,8 @@ const MyPosts = () => {
 
     return (
         <div className="max-w-full px-4 py-10 bg-[#ffffff80]">
+            <ReTitle title='My-Posts || Krishi-LInk'></ReTitle>
             <div className='flex gap-3 justify-center'>
-
                 <h1 className="text-2xl font-bold text-gray-800 mb-6 flex gap-3 items-center"><FaSeedling className='text-green-600' size={25} /> My Posted Crops</h1>
             </div>
             {loading ? <Loader></Loader> :
