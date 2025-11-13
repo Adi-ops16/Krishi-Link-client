@@ -72,21 +72,35 @@ const InterestForm = ({ _id, price_per_unit, quantity }) => {
             interestedUserName: user.displayName
         };
 
-        axiosSecure.post(`/crops/${_id}/interests`, newInterest)
-            .then((data) => {
-                if (data.data.modifiedCount) {
-                    Swal.fire({
-                        icon: "success",
-                        title: "Interest Sent!",
-                        text: "Your interest has been submitted successfully",
-                        confirmButtonColor: "#4CAF50",
+        Swal.fire({
+            title: "You are submitting an interest for this crop",
+            text: "You won't be able to revert this! Do you confirm?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Confirm!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axiosSecure.post(`/crops/${_id}/interests`, newInterest)
+                    .then((data) => {
+                        if (data.data.modifiedCount) {
+                            Swal.fire({
+                                icon: "success",
+                                title: "Interest Sent!",
+                                text: "Your interest has been submitted successfully",
+                                confirmButtonColor: "#4CAF50",
+                            });
+                            e.target.reset();
+                            setInterestedQuantity("");
+                            setTotalPrice(0);
+                            setInterested(true)
+                        }
                     });
-                    e.target.reset();
-                    setInterestedQuantity("");
-                    setTotalPrice(0);
-                    setInterested(true)
-                }
-            });
+            }
+        });
+
     };
 
     return (

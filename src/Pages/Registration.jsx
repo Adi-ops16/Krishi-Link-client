@@ -4,11 +4,13 @@ import Swal from 'sweetalert2';
 import loginImage from '../assets/authBanner.jpg';
 import { FaEye } from 'react-icons/fa6';
 import { IoIosEyeOff } from 'react-icons/io';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 
 const Registration = () => {
     const { setUser, setUserLoading, createNewUser, googleSignUp, updateUser } = useAuthContext();
     const [showPassword, setShowPassword] = useState(false);
+    const location = useLocation()
+    const navigate = useNavigate()
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -32,6 +34,7 @@ const Registration = () => {
                 })
                 setUser(user)
                 setUserLoading(false)
+                navigate(location.state ? location.state : "/")
             })
             .catch(error => {
                 console.log("error on creating a user", error);
@@ -56,6 +59,7 @@ const Registration = () => {
                 });
                 setUser(data.user)
                 setUserLoading(false)
+                navigate(location.state ? location.state : "/")
             })
             .catch((error) => console.log(error));
     };

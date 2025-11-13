@@ -4,7 +4,7 @@ import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { FaUserCircle } from "react-icons/fa";
 import Swal from 'sweetalert2';
 
-const OwnersInterestsTable = ({ _id }) => {
+const OwnersInterestsTable = ({ _id, setAvailableQuantity, fetchCrop }) => {
     const { user } = useAuthContext();
     const axiosSecure = useAxiosSecure();
     const [interests, setInterests] = useState([]);
@@ -25,8 +25,8 @@ const OwnersInterestsTable = ({ _id }) => {
             });
 
             if (res.data.modifiedCount !== 0) {
-                setInterests(interests =>
-                    interests.map((interest) =>
+                setInterests((prev) =>
+                    prev.map((interest) =>
                         interest.interest_id.toString() === interest_id.toString()
                             ? { ...interest, status: newStatus }
                             : interest
@@ -37,11 +37,42 @@ const OwnersInterestsTable = ({ _id }) => {
                     icon: "success",
                     title: `Interest ${newStatus}`,
                     text: `You have ${newStatus} this interest`,
-                    confirmButtonColor: "#4CAF50"
+                    confirmButtonColor: "#4CAF50",
                 });
             }
         } catch (err) {
-            console.error("Error from updating interest:", err);
+            console.error("Error updating interest:", err);
+        }
+    };
+
+    const handleAcceptInterest = async (interest_id) => {
+        try {
+            const acceptedInterest = interests.find(
+                (interest) => interest.interest_id.toString() === interest_id.toString()
+            );
+
+            if (!acceptedInterest) return;
+
+            const { requestedQuantity } = acceptedInterest;
+
+            const { data: crop } = await axiosSecure.get(`/crops/${_id}`);
+            const availableQuantity = crop.quantity - requestedQuantity;
+
+            const res = await axiosSecure.patch(`/update/crop/${_id}`, {
+                quantity: availableQuantity,
+                updated_at: new Date(),
+            });
+
+            if (res.data.modifiedCount !== 0) {
+                setAvailableQuantity(availableQuantity);
+                fetchCrop(); // instantly refresh crop data
+            }
+
+            // Update interest status
+            await handleStatusChange(interest_id, "accepted");
+
+        } catch (error) {
+            console.log("Failed to update crop quantity:", error);
         }
     };
 
@@ -73,7 +104,6 @@ const OwnersInterestsTable = ({ _id }) => {
                                 <tr
                                     key={interest.interest_id}
                                     className="border-b border-gray-200 hover:bg-gray-50 transition-colors" >
-
                                     <td className="py-3 px-4">
                                         <div className="flex items-center gap-3">
                                             <FaUserCircle className="text-green-600 text-xl" />
@@ -88,7 +118,9 @@ const OwnersInterestsTable = ({ _id }) => {
                                         </div>
                                     </td>
 
-                                    <td className="py-3 px-4 text-gray-700">{interest.message}</td>
+                                    <td className="py-3 px-4 text-gray-700">
+                                        {interest.message}
+                                    </td>
 
                                     <td className="py-3 px-4 text-center font-medium text-gray-700">
                                         {interest.requestedQuantity}
@@ -111,12 +143,10 @@ const OwnersInterestsTable = ({ _id }) => {
 
                                     <td className="py-3 px-4 flex flex-col gap-2">
                                         <button
-                                            onClick={() =>
-                                                handleStatusChange(interest.interest_id, "accepted")
-                                            }
+                                            onClick={() => handleAcceptInterest(interest.interest_id)}
                                             disabled={interest.status !== "pending"}
                                             className={`btn btn-sm border-none text-white shadow-none transition-all duration-300 ${interest.status !== "pending"
-                                                ? "bg-gray-300 cursor-not-allowed"
+                                                ? "hidden"
                                                 : "bg-linear-to-r from-green-600 to-lime-500 hover:from-green-500 hover:to-lime-400"}`}>
                                             Accept
                                         </button>
@@ -127,7 +157,7 @@ const OwnersInterestsTable = ({ _id }) => {
                                             }
                                             disabled={interest.status !== "pending"}
                                             className={`btn btn-sm border-none text-white shadow-none transition-all duration-300 ${interest.status !== "pending"
-                                                ? "bg-gray-300 cursor-not-allowed"
+                                                ? "hidden"
                                                 : "bg-linear-to-r from-red-600 to-rose-500 hover:from-red-600 hover:to-rose-600"}`}>
                                             Reject
                                         </button>

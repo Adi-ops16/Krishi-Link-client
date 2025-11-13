@@ -7,10 +7,12 @@ import useAuthContext from "../Hooks/useAuthContext";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import RingLoader from "../Components/Loaders/Loader";
+import { useNavigate } from "react-router";
 
 const AddCrop = () => {
     const { user } = useAuthContext()
     const axiosSecure = useAxiosSecure()
+    const navigate = useNavigate()
 
     const handleCropAdd = (e) => {
         e.preventDefault()
@@ -36,10 +38,11 @@ const AddCrop = () => {
                     Swal.fire({
                         icon: "success",
                         title: "Your crop has been added",
-                        text: "Thank you for trusting us",
+                        text: "Thank you for your support",
                         confirmButtonColor: "#4CAF50"
                     });
                     e.target.reset()
+                    navigate("/my-post" )
                 }
             })
     }

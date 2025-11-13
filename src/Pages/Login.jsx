@@ -4,12 +4,16 @@ import loginImage from "../assets/authBanner.jpg";
 import { useState } from "react";
 import { FaEye } from "react-icons/fa6";
 import { IoIosEyeOff } from "react-icons/io";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 
 
 const Login = () => {
+
     const { setUser, setUserLoading, signInUser, googleSignUp } = useAuthContext();
     const [showPassword, setShowPassword] = useState(false)
+    const location = useLocation()
+    const navigate = useNavigate()
+
     const handleLogin = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
@@ -25,6 +29,7 @@ const Login = () => {
                 });
                 setUser(data.user);
                 setUserLoading(false);
+                navigate(location.state ? location.state : "/")
             })
             .catch(error => {
                 Swal.fire({
@@ -39,14 +44,15 @@ const Login = () => {
 
     const handleGoogleSignUp = () => {
         googleSignUp()
-            .then(data => {
+            .then((data) => {
                 Swal.fire({
                     icon: "success",
                     title: "Welcome to KrishiLink",
                     text: "Login Successful",
                     confirmButtonColor: "#4CAF50"
                 });
-                console.log("user data", data)
+                setUser(data.user)
+                navigate(location.state ? location.state : "/")
             })
             .catch(error => console.log(error));
     };
@@ -143,7 +149,7 @@ const Login = () => {
 
                     <p className="text-center text-sm text-gray-600 mt-6">
                         New here?{" "}
-                        <Link to="/auth/registration" className="text-[#4CAF50] font-semibold hover:underline">
+                        <Link to="/auth/registration" state={location.state} className="text-[#4CAF50] font-semibold hover:underline">
                             Create an Account
                         </Link>
                     </p>
