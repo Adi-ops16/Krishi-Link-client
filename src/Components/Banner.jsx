@@ -8,7 +8,7 @@ import "swiper/css/pagination";
 
 import banner from "../assets/banner.jpg"; // background image
 
-const Banner = () => {
+const Banner = ({ handleScrollToBlogs }) => {
     const slides = [
         {
             title: "Grow, Connect & Thrive",
@@ -32,7 +32,7 @@ const Banner = () => {
             title: "Sustainability Starts with You",
             text: "Together, we can promote eco-friendly farming and ensure a greener tomorrow for future generations.",
             button: "Learn More",
-            link: "/about-us",
+            link: handleScrollToBlogs, // function reference
         },
     ];
 
@@ -62,27 +62,30 @@ const Banner = () => {
             >
                 {slides.map((slide, index) => (
                     <SwiperSlide key={index}>
-                        <div
-                            className="hero h-[calc(100vh/1.5)] bg-cover bg-center relative"
-                            style={{
-                                backgroundImage: `url(${banner})`,
-                            }}
-                        >
+                        <div className="hero h-[calc(100vh/1.5)] bg-cover bg-center relative" style={{ backgroundImage: `url(${banner})` }} >
                             <div className="absolute inset-0 bg-black/30"></div>
                             <div className="relative hero-content text-center text-neutral-content px-6 z-10">
-                                <div className="max-w-md mx-auto" data-aos="fade-up"
-                                    data-aos-delay="200">
+                                <div className="max-w-md mx-auto" data-aos="fade-up" data-aos-delay="200">
                                     <h1 className="mb-5 text-5xl font-extrabold text-white drop-shadow-lg raleway">
                                         {slide.title}
                                     </h1>
                                     <p className="mb-6 text-lg text-gray-100 leading-relaxed">
                                         {slide.text}
                                     </p>
-                                    <Link
-                                        to={slide.link}
-                                        className="btn bg-linear-to-r from-green-600 to-lime-500 border-none text-white shadow-none hover:from-green-500 hover:to-lime-400 transition-all duration-300">
-                                        {slide.button}
-                                    </Link>
+
+                                    {typeof slide.link === "string" ?
+                                        <Link
+                                            to={slide.link}
+                                            className="btn bg-linear-to-r from-green-600 to-lime-500 border-none text-white shadow-none hover:from-green-500 hover:to-lime-400 transition-all duration-300">
+                                            {slide.button}
+                                        </Link>
+                                        :
+                                        <button
+                                            onClick={slide.link}
+                                            className="btn bg-linear-to-r from-green-600 to-lime-500 border-none text-white shadow-none hover:from-green-500 hover:to-lime-400 transition-all duration-300">
+                                            {slide.button}
+                                        </button>
+                                    }
                                 </div>
                             </div>
                         </div>

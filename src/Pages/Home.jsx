@@ -1,5 +1,5 @@
 import { ReTitle } from 're-title';
-import React from 'react';
+import React, { useRef } from 'react';
 import Banner from '../Components/Banner';
 import Slider from '../Components/Slider';
 import AboutUs from '../Components/AboutUs';
@@ -9,13 +9,19 @@ import HowItWorks from '../Components/HowItWorks';
 import Blogs from '../Components/Blogs';
 
 const Home = () => {
+    const blogsRef = useRef()
+
+    const handleScrollToBlogs = () => {
+        blogsRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
     return (
         <div className='px-2'>
             {/* title */}
             <ReTitle title='Home | Krishi-Link'></ReTitle>
 
             {/* banner */}
-            <Banner></Banner>
+            <Banner handleScrollToBlogs={handleScrollToBlogs}></Banner>
 
             {/* slider */}
             <Slider></Slider>
@@ -29,8 +35,10 @@ const Home = () => {
             {/* achievements */}
             <Achievements></Achievements>
 
-            {/* Blogs */}
-            <Blogs></Blogs>
+            <div ref={blogsRef}>
+                {/* Blogs */}
+                <Blogs></Blogs>
+            </div>
 
             {/* Newsletter */}
             <Newsletters></Newsletters>

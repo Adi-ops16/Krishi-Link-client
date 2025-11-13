@@ -7,6 +7,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/effect-coverflow';
 import { MapPin } from 'lucide-react';
 import { Link } from 'react-router';
+import { FaRightLong } from 'react-icons/fa6';
 
 const Slider = () => {
     const axiosInstance = useAxios();
@@ -20,9 +21,10 @@ const Slider = () => {
 
     return (
         <div data-aos="fade-up" className="max-w-7xl mx-auto px-4 md:px-8 py-12">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-center my-10 text-[#2e2e2e]">
-                🌾 Latest Crops
-            </h2>
+            <div className='flex justify-between items-center'>
+                <h2 className="text-3xl md:text-4xl font-extrabold text-center my-10 text-[#2e2e2e]">🌾 Latest Crops</h2>
+                <Link to="/all-crops" className='flex items-center gap-2 text-white font-normal text-md btn bg-linear-to-r from-green-600 to-lime-500 border-none shadow-none hover:from-green-500 hover:to-lime-400 transition-all duration-300'>View All <FaRightLong strokeWidth={0}/></Link>
+            </div>
 
             <Swiper
                 pagination={{ clickable: true }}

@@ -12,8 +12,7 @@ const Error = () => {
         <img
           src={notFound}
           alt="404 Not Found"
-          className="w-64 md:w-80 mb-8 drop-shadow-lg"
-        />
+          className="w-64 md:w-80 mb-8 drop-shadow-lg"/>
 
         {/* Text */}
         <h1 className="text-5xl font-extrabold text-green-600 mb-3">404</h1>
@@ -21,7 +20,7 @@ const Error = () => {
           Oops! Page Not Found
         </h2>
         <p className="text-gray-600 mb-8 max-w-md">
-          The page you’re looking for might have been removed, renamed, or is
+          The page you're looking for might have been removed, renamed, or is
           temporarily unavailable.  
           Don't worry — you can head back home safely!
         </p>
