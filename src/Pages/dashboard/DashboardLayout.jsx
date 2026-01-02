@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../assets/logo.png'
 import { ChevronRight } from 'lucide-react';
-import { Link, NavLink, Outlet, useNavigate } from 'react-router';
+import { Link, NavLink, Outlet } from 'react-router';
 import Swal from 'sweetalert2';
 import useAuthContext from '../../Hooks/useAuthContext';
 import { FaHome } from 'react-icons/fa';
@@ -12,7 +12,6 @@ import { CgProfile } from 'react-icons/cg';
 const DashboardLayout = () => {
 
     const { user, logout, setUser } = useAuthContext()
-    const navigate = useNavigate()
 
     const handleLogOut = () => {
         logout()
@@ -23,7 +22,6 @@ const DashboardLayout = () => {
                     confirmButtonColor: "#4CAF50"
                 });
                 setUser(null);
-                navigate('/')
             })
             .catch((error) => console.log(error.code));
     }
@@ -72,9 +70,9 @@ const DashboardLayout = () => {
                             <label htmlFor="my-drawer-4" className="btn btn-sm btn-ghost">
                                 <ChevronRight size={20} />
                             </label>
-                            <span className="font-semibold text-lg text-primary hidden md:inline">
+                            <Link to="/" className="font-semibold text-lg text-primary">
                                 Krishi-Link
-                            </span>
+                            </Link>
                         </div>
 
                         {/* Right */}
@@ -106,8 +104,8 @@ const DashboardLayout = () => {
                 <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
                 <div className="flex min-h-full flex-col bg-base-100 border-r border-primary/10 is-drawer-close:w-14 is-drawer-open:w-64 transition-all">
                     {/* Sidebar content here */}
-                    <ul className="menu gap-1 w-full grow">
-                        <li className='is-drawer-close:w-12 is-drawer-open:w-20'>
+                    <ul className="menu gap-1 w-full grow py-16 lg:py-0">
+                        <li className='is-drawer-close:w-12 is-drawer-open:w-20 hidden lg:inline'>
                             <Link to={`/`} className="py-4">
                                 {/* Logo */}
                                 <img className=" rounded-full  transition-all" src={logo} alt="logo" />
