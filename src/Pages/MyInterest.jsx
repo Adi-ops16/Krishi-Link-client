@@ -40,7 +40,7 @@ const MyInterest = () => {
     });
 
     return (
-        <div className={`min-h-[calc(100vh/2)] ${interests.length === 0 ? "bg-[#ffffff80]" : "bg-linear-to-b from-green-50 to-white"} py-14 px-4`}>
+        <div className={`min-h-[calc(100vh/2)] ${interests.length === 0 ? "bg-[#ffffff80]" : "bg-linear-to-b from-green-50 to-white"} py-4 px-4 rounded-xl`}>
             <ReTitle title="My Interests || Krishi-Link" />
 
             {loading ? <Loader /> :

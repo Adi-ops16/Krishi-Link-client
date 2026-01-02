@@ -13,6 +13,8 @@ import MyInterest from "../Pages/MyInterest";
 import MyPosts from "../Pages/MyPosts";
 import Loader from "../Components/Loaders/Loader";
 import Error from "../Pages/Error";
+import DashboardLayout from "../Pages/dashboard/DashboardLayout";
+import DashboardHome from "../Pages/dashboard/DashboardHome";
 
 export const router = createBrowserRouter([
     {
@@ -37,10 +39,25 @@ export const router = createBrowserRouter([
             },
             {
                 path: "crop-details/:id",
-                element:
-                    <PrivateRout>
-                        <CropsDetails></CropsDetails>
-                    </PrivateRout>,
+                element: <CropsDetails></CropsDetails>
+            }
+        ]
+    },
+    {
+        path: "auth",
+        Component: AuthLayout,
+        children: [
+            { path: "login", Component: Login },
+            { path: "registration", Component: Registration }
+        ]
+    },
+    {
+        path: "dashboard",
+        Component: DashboardLayout,
+        children: [
+            {
+                index: true,
+                Component: DashboardHome
             },
             {
                 path: "profile",
@@ -63,14 +80,6 @@ export const router = createBrowserRouter([
                         <MyPosts></MyPosts>
                     </PrivateRout>
             },
-        ]
-    },
-    {
-        path: "auth",
-        Component: AuthLayout,
-        children: [
-            { path: "login", Component: Login },
-            { path: "registration", Component: Registration }
         ]
     }
 ])

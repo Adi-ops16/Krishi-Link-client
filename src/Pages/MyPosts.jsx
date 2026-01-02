@@ -92,7 +92,7 @@ const MyPosts = () => {
     }
 
     return (
-        <div className="max-w-full px-4 py-10 bg-[#ffffff80]">
+        <div className="max-w-full px-4 py-10 bg-[#ffffff80] rounded-xl">
             <ReTitle title='My-Posts || Krishi-LInk'></ReTitle>
             <div className='flex gap-3 justify-center'>
                 <h1 className="text-2xl font-bold text-gray-800 mb-6 flex gap-3 items-center"><FaSeedling className='text-green-600' size={25} /> My Posted Crops</h1>

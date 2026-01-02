@@ -5,9 +5,7 @@ import logo from '../assets/logo.png';
 import { FaHome, FaRegUserCircle, FaSeedling } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import { MdOutlinePostAdd } from 'react-icons/md';
-import { GrDocumentText } from 'react-icons/gr';
-import { GoHeartFill } from 'react-icons/go';
-import { CgProfile } from 'react-icons/cg';
+import { LuLayoutDashboard } from 'react-icons/lu';
 
 const Navbar = () => {
     const { logout, user, setUser } = useAuthContext();
@@ -33,11 +31,9 @@ const Navbar = () => {
                 user &&
                 <>
                     <li><NavLink to="/add-crop"><MdOutlinePostAdd />Add Crop</NavLink></li>
-                    <li><NavLink to="/my-post"><GrDocumentText /> My Posts</NavLink></li>
-                    <li><NavLink to="/my-interest"><GoHeartFill /> My Interests</NavLink></li>
-                    <li><NavLink to="/profile"><CgProfile /> Profile</NavLink></li>
                 </>
             }
+            <li><NavLink to="/dashboard"><LuLayoutDashboard /> Dashboard</NavLink></li>
         </>
     );
 

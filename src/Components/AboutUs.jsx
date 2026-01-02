@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-const AboutUs = () => {
+const AboutUs = ({ aboutRef }) => {
     return (
-        <section className="bg-[#f9faf9] py-16 my-6">
+        <section ref={aboutRef} className="bg-[#f9faf9] py-16 my-6">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-10">
 
                 <div className="lg:w-1/2 w-full flex justify-center"

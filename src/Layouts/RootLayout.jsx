@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Navbar from '../Components/Navbar';
 import { Outlet } from 'react-router';
 import Footer from '../Components/Footer';
@@ -7,6 +7,10 @@ import 'aos/dist/aos.css';
 
 
 const RootLayout = () => {
+
+    const aboutRef = useRef(null)
+
+
     // aos initialization
     useEffect(() => {
         AOS.init({
@@ -20,18 +24,24 @@ const RootLayout = () => {
         AOS.refresh()
     }, [])
 
+    const handleScrollToAbout = () => {
+        if (aboutRef.current) {
+            aboutRef.current.scrollIntoView({ behavior: "smooth" })
+        }
+    }
+
     return (
         <div className='flex flex-col min-h-screen'>
-            <header>
+            <header className='sticky top-0 z-50'>
                 <nav>
                     <Navbar></Navbar>
                 </nav>
             </header>
             <main className='flex-1'>
-                <Outlet></Outlet>
+                <Outlet context={{ aboutRef }}></Outlet>
             </main>
             <footer>
-                <Footer></Footer>
+                <Footer handleScrollToAbout={handleScrollToAbout}></Footer>
             </footer>
         </div>
     );

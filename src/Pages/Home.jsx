@@ -7,16 +7,18 @@ import Achievements from '../Components/Achievements';
 import Newsletters from '../Components/Newsletters';
 import HowItWorks from '../Components/HowItWorks';
 import Blogs from '../Components/Blogs';
+import { useOutletContext } from 'react-router';
 
 const Home = () => {
+    const {aboutRef} = useOutletContext()
     const blogsRef = useRef()
 
     const handleScrollToBlogs = () => {
-        blogsRef.current?.scrollIntoView({ behavior: "smooth" });
+        blogsRef.current?.scrollIntoView({ behavior: "smooth"});
     };
 
     return (
-        <div className='px-2'>
+        <div className='px-2 overflow-hidden'>
             {/* title */}
             <ReTitle title='Home | Krishi-Link'></ReTitle>
 
@@ -30,7 +32,7 @@ const Home = () => {
             <HowItWorks></HowItWorks>
 
             {/* About us section */}
-            <AboutUs></AboutUs>
+            <AboutUs aboutRef={aboutRef}></AboutUs>
 
             {/* achievements */}
             <Achievements></Achievements>
