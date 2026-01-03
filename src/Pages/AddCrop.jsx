@@ -18,7 +18,7 @@ const AddCrop = () => {
         e.preventDefault()
         const crop_name = e.target.crop_name.value
         const type = e.target.type.value
-        const price_per_unit = e.target.price.value
+        const price_per_unit = Number(e.target.price.value)
         const unit = e.target.unit.value
         const quantity = e.target.quantity.value
         const location = e.target.location.value
@@ -42,7 +42,7 @@ const AddCrop = () => {
                         confirmButtonColor: "#4CAF50"
                     });
                     e.target.reset()
-                    navigate("/my-post" )
+                    navigate("/my-post")
                 }
             })
     }

@@ -12,20 +12,32 @@ const AllCrops = () => {
     const [crops, setCrops] = useState([]);
     const [searchCrops, setSearchCrop] = useState("");
     const [loading, setLoading] = useState(true)
+    const [filters, setFilters] = useState({
+        type: "",
+        price: ""
+    })
 
     useEffect(() => {
         setLoading(true)
-        axiosInstance("/crops")
+        axiosInstance.get(`/crops?type=${filters?.type}&price=${filters?.price}`)
             .then((data) => {
                 setCrops(data.data)
                 setLoading(false)
             })
             .catch((err) => console.error(err));
-    }, [axiosInstance]);
+    }, [axiosInstance, filters]);
 
     const filteredCrops = crops.filter((crop) =>
         crop.crop_name.toLowerCase().includes(searchCrops.toLowerCase())
     );
+
+    const handleFilterChange = (e) => {
+        const { name, value } = e.target;
+        setFilters((prev) => ({
+            ...prev,
+            [name]: value
+        }))
+    }
 
     return (
         <div className="max-w-11/12 mx-auto py-12 px-4 sm:px-6 lg:px-8">
@@ -38,14 +50,59 @@ const AllCrops = () => {
             </div>
 
             {/* Search Bar */}
-            <div className="mb-8 flex justify-center">
-                <input
-                    type="text"
-                    placeholder="Search crops..."
-                    onChange={(e) => setSearchCrop(e.target.value)}
-                    className="w-full md:w-1/2 px-4 py-2 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#4CAF50]"
-                />
+            <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 items-end">
+                {/* Search input */}
+                <div className="lg:col-span-2">
+                    <label className="block mb-1 text-sm font-medium text-gray-700">
+                        Search crops
+                    </label>
+                    <input
+                        type="text"
+                        placeholder="Search crops..."
+                        onChange={(e) => setSearchCrop(e.target.value)}
+                        className="w-full px-4 py-2 rounded-lg border border-gray-300 shadow-sm 
+                       focus:outline-none focus:ring-2 focus:ring-[#4CAF50]"
+                    />
+                </div>
+
+                {/* Filter by type */}
+                <div>
+                    <label className="block mb-1 text-sm font-medium text-gray-700">
+                        Search by type
+                    </label>
+                    <select
+                        name="type"
+                        value={filters.type}
+                        onChange={handleFilterChange}
+                        className="select w-full rounded-lg border border-gray-300 shadow-sm focus-within:outline-none focus-within:border-2 focus-within:border-[#4CAF50]"
+                    >
+                        <option value="">All types</option>
+                        <option value="Vegetable">Vegetable</option>
+                        <option value="Fruit">Fruit</option>
+                        <option value="Grain">Grain</option>
+                    </select>
+                </div>
+
+                {/* Sort by price */}
+                <div>
+                    <label className="block mb-1 text-sm font-medium text-gray-700">
+                        Sort by price
+                    </label>
+                    <select
+                        name="price"
+                        value={filters.price}
+                        onChange={handleFilterChange}
+                        className="select w-full rounded-lg border border-gray-300 shadow-sm focus-within:outline-none focus-within:border-2 focus-within:border-[#4CAF50]"
+                    >
+                        <option value="" disabled >
+                            Select
+                        </option>
+                        <option value="asc">Low → High</option>
+                        <option value="desc">High → Low</option>
+                    </select>
+                </div>
             </div>
+
 
             {/* all Crops */}
             {loading ? <Loader></Loader> :
