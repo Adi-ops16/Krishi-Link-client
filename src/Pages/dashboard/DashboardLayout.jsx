@@ -36,21 +36,18 @@ const DashboardLayout = () => {
         </li>
         <li>
             <NavLink to='/dashboard/profile' className="is-drawer-close:tooltip is-drawer-close:tooltip-right bg-primary/10 text-black/70" data-tip="Profile">
-                {/* Home icon */}
                 <CgProfile></CgProfile>
                 <span className="is-drawer-close:hidden">Profile</span>
             </NavLink>
         </li>
         <li>
             <NavLink to="/dashboard/my-post" className="is-drawer-close:tooltip is-drawer-close:tooltip-right bg-primary/10 text-black/70" data-tip="My posts">
-                {/* Home icon */}
                 <GrDocumentText />
                 <span className="is-drawer-close:hidden">My posts</span>
             </NavLink>
         </li>
         <li>
             <NavLink to="/dashboard/my-interest" className="is-drawer-close:tooltip is-drawer-close:tooltip-right bg-primary/10 text-black/70" data-tip="My Interests">
-                {/* Home icon */}
                 <GoHeartFill />
                 <span className="is-drawer-close:hidden">My Interests</span>
             </NavLink>

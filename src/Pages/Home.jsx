@@ -8,6 +8,8 @@ import Newsletters from '../Components/Newsletters';
 import HowItWorks from '../Components/HowItWorks';
 import Blogs from '../Components/Blogs';
 import { useOutletContext } from 'react-router';
+import FAQ from '../Components/FAQ';
+import Testimonials from '../Components/Testimonials';
 
 const Home = () => {
     const {aboutRef} = useOutletContext()
@@ -41,6 +43,12 @@ const Home = () => {
                 {/* Blogs */}
                 <Blogs></Blogs>
             </div>
+
+            {/* Testimonials */}
+            <Testimonials></Testimonials>
+
+            {/* FAQ */}
+            <FAQ></FAQ>
 
             {/* Newsletter */}
             <Newsletters></Newsletters>

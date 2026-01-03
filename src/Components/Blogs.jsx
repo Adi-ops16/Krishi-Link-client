@@ -9,6 +9,7 @@ const Blogs = () => {
             title: "The Future of Organic Farming",
             desc: "Discover how sustainable organic farming practices are revolutionizing Bangladesh’s agriculture sector and increasing long-term productivity.",
             aos: "fade-up",
+            link: "https://www.ceatspecialty.com/gb/blog/technology/whats-the-outlook-for-organic-farming-in-the-future"
         },
         {
             id: 2,
@@ -16,6 +17,7 @@ const Blogs = () => {
             title: "Modern Tools Empowering Farmers",
             desc: "From smart irrigation to soil monitoring — explore how technology is changing the way farmers grow and manage crops efficiently.",
             aos: "fade-up",
+            link:"https://timesofagriculture.in/modern-agricultural-tools/"
         },
         {
             id: 3,
@@ -23,6 +25,7 @@ const Blogs = () => {
             title: "Efficient Water Management Techniques",
             desc: "Learn practical ways to save water and improve irrigation systems for healthier crops and a greener environment.",
             aos: "fade-up",
+            link:"https://regenx.ag/blog/agricultural-water-management/"
         },
     ];
 
@@ -59,7 +62,7 @@ const Blogs = () => {
                                 </h3>
                                 <p className="text-gray-600 text-sm mb-4">{post.desc}</p>
                                 <a
-                                    href="#"
+                                    href={post.link}
                                     className="text-green-600 font-medium hover:text-green-700 transition"
                                 >
                                     Read More →

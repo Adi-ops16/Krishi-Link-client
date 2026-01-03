@@ -27,13 +27,13 @@ const Footer = ({ handleScrollToAbout }) => {
                         </div>
 
                         <div className="flex gap-2">
-                            <a className="btn btn-circle btn-xs btn-ghost hover:bg-primary hover:text-white">
+                            <a href='https://www.facebook.com/spiegel.spike.854114' className="btn btn-circle btn-xs btn-ghost hover:bg-primary hover:text-white">
                                 <FaFacebookF />
                             </a>
-                            <a className="btn btn-circle btn-xs btn-ghost hover:bg-primary hover:text-white">
+                            <a href='https://x.com/AbdulHasib95581' className="btn btn-circle btn-xs btn-ghost hover:bg-primary hover:text-white">
                                 <FaXTwitter />
                             </a>
-                            <a className="btn btn-circle btn-xs btn-ghost hover:bg-primary hover:text-white">
+                            <a href='https://www.instagram.com/_astro.philee_/' className="btn btn-circle btn-xs btn-ghost hover:bg-primary hover:text-white">
                                 <FaInstagram />
                             </a>
                             <a className="btn btn-circle btn-xs btn-ghost hover:bg-primary hover:text-white">

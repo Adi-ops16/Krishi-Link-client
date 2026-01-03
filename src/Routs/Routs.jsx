@@ -38,6 +38,20 @@ export const router = createBrowserRouter([
                     </PrivateRout>
             },
             {
+                path: "my-interest",
+                element:
+                    <PrivateRout>
+                        <MyInterest></MyInterest>
+                    </PrivateRout>
+            },
+            {
+                path: "my-post",
+                element:
+                    <PrivateRout>
+                        <MyPosts></MyPosts>
+                    </PrivateRout>
+            },
+            {
                 path: "crop-details/:id",
                 element: <CropsDetails></CropsDetails>
             }
@@ -46,6 +60,7 @@ export const router = createBrowserRouter([
     {
         path: "auth",
         Component: AuthLayout,
+        errorElement: <Error></Error>,
         children: [
             { path: "login", Component: Login },
             { path: "registration", Component: Registration }
@@ -53,6 +68,7 @@ export const router = createBrowserRouter([
     },
     {
         path: "dashboard",
+        errorElement: <Error></Error>,
         element: <PrivateRout>
             <DashboardLayout></DashboardLayout>
         </PrivateRout>,
